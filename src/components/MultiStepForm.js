@@ -17,7 +17,7 @@ export default () => (
       state: '',
       postalCode: '',
       country: '',
-      useAddressForPayment: false,
+      saveAddress: false,
       arrivingType: '',
       phoneNumber: '',
       email: '',
@@ -39,16 +39,20 @@ export default () => (
       validationSchema={Yup.object({
         firstName: Yup.string().required('required'),
         lastName: Yup.string().required('required'),
+        address: Yup.string().required('required'),
+        city: Yup.string().required('required'),
+        postalCode: Yup.string().required('required'),
+        country: Yup.string().required('required'),
       })}
     />
 
     <ContactDetailsForm
       label="Contact Details"
-      validationSchema={Yup.object({
-        email: Yup.string()
-          .email('Invalid email address')
-          .required('required'),
-      })}
+      // validationSchema={Yup.object({
+      //   email: Yup.string()
+      //     .email('Invalid email address')
+      //     .required('required'),
+      // })}
     />
 
     <PaymentDetailsForm label="Payment Details" />

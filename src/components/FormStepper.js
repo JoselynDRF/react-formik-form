@@ -5,12 +5,28 @@ import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 export default ({ children, initialValues, onSubmit }) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = React.Children.toArray(children);
   const currentStep = steps[activeStep];
   const [snapshot, setSnapshot] = useState(initialValues);
+  const classes = useStyles();
 
   const isLastStep = () => activeStep === steps.length - 1;
 
@@ -32,7 +48,7 @@ export default ({ children, initialValues, onSubmit }) => {
     >
       {(formik) => (
         <Form>
-          <Stepper activeStep={activeStep} alternativeLabel>
+          <Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
             {steps.map(({ props }) => (
               <Step key={props.label}>
                 <StepLabel>{props.label}</StepLabel>
@@ -42,12 +58,21 @@ export default ({ children, initialValues, onSubmit }) => {
 
           {currentStep}
 
-          <Button onClick={() => handleBack(formik.values)} disabled={activeStep === 0}>
-            Back
-          </Button>
-          <Button variant="contained" color="primary" type="submit">
-            {isLastStep() ? 'Finish' : 'Next'}
-          </Button>
+          <div className={classes.buttons}>
+            {activeStep !== 0 && (
+              <Button onClick={() => handleBack(formik.values)} className={classes.button}>
+                Back
+              </Button>
+            )}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              {isLastStep() ? 'Finish' : 'Next'}
+            </Button>
+          </div>
         </Form>
       )}
     </Formik>
