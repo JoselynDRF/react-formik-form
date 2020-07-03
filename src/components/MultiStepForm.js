@@ -21,6 +21,7 @@ export default () => (
       phoneNumber: '',
       email: '',
       arrivingType: '',
+      allowNewsletter: false,
       cardName: '',
       cardNumber: '',
       expiryDate: '',
@@ -55,8 +56,15 @@ export default () => (
           .required('required'),
       })}
     />
-
-    <PaymentDetailsForm label="Payment Details" />
+    <PaymentDetailsForm
+      label="Payment Details"
+      validationSchema={Yup.object({
+        cardName: Yup.string().required('required'),
+        cardNumber: Yup.string().required('required'),
+        expiryDate: Yup.string().required('required'),
+        cardDigits: Yup.string().required('required'),
+      })}
+    />
     <OrderSummary label="Order Summary" />
   </FormStepper>
 );
