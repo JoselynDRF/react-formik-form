@@ -18,9 +18,9 @@ export default () => (
       postalCode: '',
       country: '',
       saveAddress: false,
-      arrivingType: '',
       phoneNumber: '',
       email: '',
+      arrivingType: '',
       cardName: '',
       cardNumber: '',
       expiryDate: '',
@@ -48,11 +48,12 @@ export default () => (
 
     <ContactDetailsForm
       label="Contact Details"
-      // validationSchema={Yup.object({
-      //   email: Yup.string()
-      //     .email('Invalid email address')
-      //     .required('required'),
-      // })}
+      validationSchema={Yup.object({
+        phoneNumber: Yup.string().required('required'),
+        email: Yup.string()
+          .email('Invalid email address')
+          .required('required'),
+      })}
     />
 
     <PaymentDetailsForm label="Payment Details" />
