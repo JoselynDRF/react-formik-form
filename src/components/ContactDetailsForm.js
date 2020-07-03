@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import {
-  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Checkbox, Box,
+  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Checkbox,
 } from '@material-ui/core';
 
 export default () => (
@@ -42,13 +42,11 @@ export default () => (
     <Grid item xs={12}>
       <FormControl component="fieldset">
         <FormLabel component="legend"> Also want product updates with our newsletter? </FormLabel>
-        <Box mt={1}>
-          <FormControlLabel
-            value="yes"
-            control={<Checkbox color="primary" />}
-            label="I want to keep me informed of products and services relevant to me"
-          />
-        </Box>
+        <FormControlLabel
+          value="yes"
+          control={<Checkbox color="primary" />}
+          label="I want to keep me informed of products and services relevant to me"
+        />
       </FormControl>
     </Grid>
   </Grid>

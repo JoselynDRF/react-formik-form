@@ -70,7 +70,7 @@ export default ({ children, initialValues, onSubmit }) => {
               color="primary"
               className={classes.button}
             >
-              {isLastStep() ? 'Finish' : 'Next'}
+              {isLastStep() ? 'Place Order' : 'Next'}
             </Button>
           </div>
         </Form>
