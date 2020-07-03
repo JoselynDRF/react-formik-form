@@ -1,15 +1,16 @@
 import React from 'react';
+import {
+  FormControl, FormControlLabel, FormLabel, Radio,
+} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import {
-  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Checkbox,
-} from '@material-ui/core';
+import { CheckboxWithLabel, RadioGroup, TextField } from 'formik-material-ui';
 
 export default () => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="phoneNumber"
         name="phoneNumber"
         label="Phone Number"
@@ -21,6 +22,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="email"
         id="email"
         name="email"
         label="Email"
@@ -33,19 +35,22 @@ export default () => (
     <Grid item xs={12}>
       <FormControl component="fieldset">
         <FormLabel component="legend"> Arriving type </FormLabel>
-        <RadioGroup row aria-label="Arriving type" name="arrivingType" defaultValue="standard">
+        <Field row component={RadioGroup} name="arrivingType">
           <FormControlLabel value="standard" control={<Radio color="primary" />} label="Standard shipping" />
           <FormControlLabel value="express" control={<Radio color="primary" />} label="Express shipping" />
-        </RadioGroup>
+        </Field>
       </FormControl>
     </Grid>
     <Grid item xs={12}>
       <FormControl component="fieldset">
         <FormLabel component="legend"> Also want product updates with our newsletter? </FormLabel>
-        <FormControlLabel
-          value="yes"
-          control={<Checkbox color="primary" />}
-          label="I want to keep me informed of products and services relevant to me"
+        <Field
+          type="checkbox"
+          id="allowNewsletter"
+          name="allowNewsletter"
+          Label={{ label: 'I want to keep me informed of products and services relevant to me' }}
+          component={CheckboxWithLabel}
+          disabled={false}
         />
       </FormControl>
     </Grid>

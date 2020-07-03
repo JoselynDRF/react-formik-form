@@ -1,14 +1,13 @@
 import React from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
-import { TextField } from 'formik-material-ui';
+import { TextField, CheckboxWithLabel } from 'formik-material-ui';
 
 export default () => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="firstName"
         name="firstName"
         label="First name"
@@ -20,6 +19,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="lastName"
         name="lastName"
         label="Last name"
@@ -31,6 +31,7 @@ export default () => (
     </Grid>
     <Grid item xs={12}>
       <Field
+        type="text"
         id="address"
         name="address"
         label="Address"
@@ -42,6 +43,7 @@ export default () => (
     </Grid>
     <Grid item xs={12}>
       <Field
+        type="text"
         id="additionalInfo"
         name="additionalInfo"
         label="Additional Information"
@@ -52,6 +54,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="city"
         name="city"
         label="City"
@@ -63,6 +66,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="state"
         name="state"
         label="State/Province/Region"
@@ -73,6 +77,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="postalCode"
         name="postalCode"
         label="Zip / Postal code"
@@ -84,6 +89,7 @@ export default () => (
     </Grid>
     <Grid item xs={12} sm={6}>
       <Field
+        type="text"
         id="country"
         name="country"
         label="Country"
@@ -94,9 +100,13 @@ export default () => (
       />
     </Grid>
     <Grid item xs={12}>
-      <FormControlLabel
-        control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-        label="Use this address for payment details"
+      <Field
+        type="checkbox"
+        id="saveAddress"
+        name="saveAddress"
+        Label={{ label: 'Use this address for payment details' }}
+        component={CheckboxWithLabel}
+        disabled={false}
       />
     </Grid>
   </Grid>

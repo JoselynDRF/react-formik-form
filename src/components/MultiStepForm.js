@@ -20,7 +20,7 @@ export default () => (
       saveAddress: false,
       phoneNumber: '',
       email: '',
-      arrivingType: '',
+      arrivingType: 'standard',
       allowNewsletter: false,
       cardName: '',
       cardNumber: '',
