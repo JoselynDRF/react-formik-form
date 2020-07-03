@@ -1,7 +1,6 @@
 import React from 'react';
+import MultiStepForm from './components/MultiStepForm';
 
 export default () => (
-  <div className="App">
-    React Formik Form
-  </div>
+  <MultiStepForm />
 );
