@@ -28,12 +28,7 @@ export default () => (
       cardDigits: '',
       rememberCardDetails: false,
     }}
-    onSubmit={(values) => {
-      const timeOut = setTimeout(() => {
-        console.log(values);
-        clearTimeout(timeOut);
-      }, 1000);
-    }}
+    onSubmit={async () => new Promise((resolve) => setTimeout(resolve, 1000))}
   >
     <DeliveryAddressForm
       label="Delivery Address"

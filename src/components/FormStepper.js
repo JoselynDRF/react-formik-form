@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Form, Formik } from 'formik';
+import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
-import { makeStyles } from '@material-ui/core';
+import { Form, Formik } from 'formik';
+import SuccessDialog from './SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
   stepper: {
@@ -26,6 +27,7 @@ export default ({ children, initialValues, onSubmit }) => {
   const steps = React.Children.toArray(children);
   const currentStep = steps[activeStep];
   const [snapshot, setSnapshot] = useState(initialValues);
+  const [showSuccess, setShowSuccess] = useState(false);
   const classes = useStyles();
 
   const isLastStep = () => activeStep === steps.length - 1;
@@ -40,14 +42,24 @@ export default ({ children, initialValues, onSubmit }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const handleSubmit = async (values) => {
+    if (isLastStep()) {
+      await onSubmit(values);
+      console.log(values);
+      setShowSuccess(true);
+    } else handleNext(values);
+  };
+
   return (
     <Formik
       initialValues={snapshot}
       validationSchema={currentStep.props.validationSchema}
-      onSubmit={(values, bag) => (isLastStep() ? onSubmit(values, bag) : handleNext(values))}
+      onSubmit={handleSubmit}
     >
-      {(formik) => (
-        <Form>
+      {({ values }) => (
+        <>
+          {showSuccess && <SuccessDialog values={snapshot} />}
+
           <Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
             {steps.map(({ props }) => (
               <Step key={props.label}>
@@ -56,24 +68,26 @@ export default ({ children, initialValues, onSubmit }) => {
             ))}
           </Stepper>
 
-          {currentStep}
+          <Form>
+            {currentStep}
 
-          <div className={classes.buttons}>
-            {activeStep !== 0 && (
-              <Button onClick={() => handleBack(formik.values)} className={classes.button}>
-                Back
+            <div className={classes.buttons}>
+              {activeStep !== 0 && (
+                <Button onClick={() => handleBack(values)} className={classes.button}>
+                  Back
+                </Button>
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                {isLastStep() ? 'Place Order' : 'Next'}
               </Button>
-            )}
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              {isLastStep() ? 'Place Order' : 'Next'}
-            </Button>
-          </div>
-        </Form>
+            </div>
+          </Form>
+        </>
       )}
     </Formik>
   );

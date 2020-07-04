@@ -1,0 +1,31 @@
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+export default ({ values }) => {
+  const [open, setOpen] = useState(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload();
+  };
+
+  return (
+    <Dialog open={open} maxWidth="sm" fullWidth>
+      <DialogTitle id="success-dialog"> Success </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {values.firstName}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary"> Close </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
