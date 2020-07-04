@@ -1,7 +1,8 @@
 import React from 'react';
+import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
-import { TextField, CheckboxWithLabel } from 'formik-material-ui';
+import { CheckboxWithLabel, Select, TextField } from 'formik-material-ui';
 
 export default () => (
   <Grid container spacing={3}>
@@ -53,6 +54,20 @@ export default () => (
       />
     </Grid>
     <Grid item xs={12} sm={6}>
+      <FormControl required fullWidth>
+        <InputLabel htmlFor="country"> Country </InputLabel>
+        <Field
+          id="country"
+          name="country"
+          component={Select}
+        >
+          <MenuItem value="US"> USA </MenuItem>
+          <MenuItem value="PT"> Portugal </MenuItem>
+          <MenuItem value="ES"> España </MenuItem>
+        </Field>
+      </FormControl>
+    </Grid>
+    <Grid item xs={12} sm={6}>
       <Field
         type="text"
         id="city"
@@ -81,18 +96,6 @@ export default () => (
         id="postalCode"
         name="postalCode"
         label="Zip / Postal code"
-        component={TextField}
-        disabled={false}
-        required
-        fullWidth
-      />
-    </Grid>
-    <Grid item xs={12} sm={6}>
-      <Field
-        type="text"
-        id="country"
-        name="country"
-        label="Country"
         component={TextField}
         disabled={false}
         required
