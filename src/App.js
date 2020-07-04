@@ -1,10 +1,19 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import purpleColor from '@material-ui/core/colors/purple';
 import MultiStepForm from './components/MultiStepForm';
 
-const useStyles = makeStyles((theme) => ({
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: purpleColor[500],
+    },
+  },
+});
+
+const useStyles = makeStyles(() => ({
   form: {
     maxWidth: 600,
     margin: theme.spacing(4, 'auto'),
@@ -15,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
 export default () => {
   const classes = useStyles();
   return (
-    <Paper className={classes.form} elevation={2}>
-      <Typography variant="h4" align="center"> Checkout </Typography>
-      <MultiStepForm />
-    </Paper>
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.form} elevation={2}>
+        <Typography variant="h4" align="center"> Checkout </Typography>
+        <MultiStepForm />
+      </Paper>
+    </ThemeProvider>
   );
 };
