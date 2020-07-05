@@ -9,8 +9,8 @@ const PaymentDetailsForm = () => (
     <Grid item xs={12} sm={6}>
       <Field
         type="text"
-        id="cardName"
-        name="cardName"
+        id="cardHolder"
+        name="cardHolder"
         label="Name on card"
         component={TextField}
         disabled={false}
@@ -70,7 +70,7 @@ const PaymentDetailsForm = () => (
 PaymentDetailsForm.title = 'Payment Details';
 
 PaymentDetailsForm.initialValues = {
-  cardName: '',
+  cardHolder: '',
   cardNumber: '',
   expiryDate: '',
   cardDigits: '',
@@ -78,7 +78,7 @@ PaymentDetailsForm.initialValues = {
 };
 
 PaymentDetailsForm.validationSchema = Yup.object({
-  cardName: Yup.string().required('required'),
+  cardHolder: Yup.string().required('required'),
   cardNumber: Yup.string().required('required'),
   expiryDate: Yup.string().required('required'),
   cardDigits: Yup.string().required('required'),

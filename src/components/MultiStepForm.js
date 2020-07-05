@@ -75,7 +75,7 @@ export default () => {
           </Stepper>
 
           <Form>
-            <CurrentStep />
+            <CurrentStep values={values} />
 
             <div className={classes.buttons}>
               {activeStep !== 0 && (
