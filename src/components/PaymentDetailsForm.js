@@ -1,9 +1,10 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
-import { TextField, CheckboxWithLabel } from 'formik-material-ui';
+import { CheckboxWithLabel, TextField } from 'formik-material-ui';
+import * as Yup from 'yup';
 
-export default () => (
+const PaymentDetailsForm = () => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
@@ -65,3 +66,22 @@ export default () => (
     </Grid>
   </Grid>
 );
+
+PaymentDetailsForm.title = 'Payment Details';
+
+PaymentDetailsForm.initialValues = {
+  cardName: '',
+  cardNumber: '',
+  expiryDate: '',
+  cardDigits: '',
+  rememberCardDetails: false,
+};
+
+PaymentDetailsForm.validationSchema = Yup.object({
+  cardName: Yup.string().required('required'),
+  cardNumber: Yup.string().required('required'),
+  expiryDate: Yup.string().required('required'),
+  cardDigits: Yup.string().required('required'),
+});
+
+export default PaymentDetailsForm;

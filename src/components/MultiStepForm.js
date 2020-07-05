@@ -1,65 +1,98 @@
-import React from 'react';
-import * as Yup from 'yup';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Stepper from '@material-ui/core/Stepper';
+import { Form, Formik } from 'formik';
 import ContactDetailsForm from './ContactDetailsForm';
 import DeliveryAddressForm from './DeliveryAddressForm';
-import FormStepper from './FormStepper';
 import OrderSummary from './OrderSummary';
 import PaymentDetailsForm from './PaymentDetailsForm';
+import SuccessDialog from './SuccessDialog';
 
-export default () => (
-  <FormStepper
-    initialValues={{
-      firstName: '',
-      lastName: '',
-      address: '',
-      additionalInfo: '',
-      country: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      saveAddress: false,
-      phoneNumber: '',
-      email: '',
-      arrivingType: 'standard',
-      allowNewsletter: false,
-      cardName: '',
-      cardNumber: '',
-      expiryDate: '',
-      cardDigits: '',
-      rememberCardDetails: false,
-    }}
-    onSubmit={async () => new Promise((resolve) => setTimeout(resolve, 1000))}
-  >
-    <DeliveryAddressForm
-      label="Delivery Address"
-      validationSchema={Yup.object({
-        firstName: Yup.string().required('required'),
-        lastName: Yup.string().required('required'),
-        address: Yup.string().required('required'),
-        city: Yup.string().required('required'),
-        postalCode: Yup.string().required('required'),
-        country: Yup.string().required('required'),
-      })}
-    />
+const useStyles = makeStyles((theme) => ({
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+}));
 
-    <ContactDetailsForm
-      label="Contact Details"
-      validationSchema={Yup.object({
-        phoneNumber: Yup.string().required('required'),
-        email: Yup.string()
-          .email('Invalid email address')
-          .required('required'),
-      })}
-    />
-    <PaymentDetailsForm
-      label="Payment Details"
-      validationSchema={Yup.object({
-        cardName: Yup.string().required('required'),
-        cardNumber: Yup.string().required('required'),
-        expiryDate: Yup.string().required('required'),
-        cardDigits: Yup.string().required('required'),
-      })}
-    />
-    <OrderSummary label="Order Summary" />
-  </FormStepper>
-);
+export default () => {
+  const classes = useStyles();
+  const steps = [DeliveryAddressForm, ContactDetailsForm, PaymentDetailsForm, OrderSummary];
+  const [activeStep, setActiveStep] = useState(0);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const CurrentStep = steps[activeStep];
+  const { validationSchema } = CurrentStep;
+
+  const initialValues = steps.reduce((values, { initialValues: initValues }) => ({
+    ...values,
+    ...initValues,
+  }), {});
+
+  const isLastStep = () => activeStep === steps.length - 1;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const submitForm = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(values);
+    setShowSuccess(true);
+  };
+
+  const handleSubmit = async (values) => (isLastStep() ? submitForm(values) : handleNext());
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values }) => (
+        <>
+          {showSuccess && <SuccessDialog values={values} />}
+
+          <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
+            {steps.map(({ title }) => (
+              <Step key={title}>
+                <StepLabel>{title}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+
+          <Form>
+            <CurrentStep />
+
+            <div className={classes.buttons}>
+              {activeStep !== 0 && (
+                <Button onClick={handleBack} className={classes.button}> Back </Button>
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                {isLastStep() ? 'Place Order' : 'Next'}
+              </Button>
+            </div>
+          </Form>
+        </>
+      )}
+    </Formik>
+  );
+};

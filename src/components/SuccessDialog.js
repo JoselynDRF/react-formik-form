@@ -20,7 +20,10 @@ export default ({ values }) => {
       <DialogTitle id="success-dialog"> Success </DialogTitle>
       <DialogContent>
         <DialogContentText>
+          All set
+          {' '}
           {values.firstName}
+          ! Check your email for a confirmation.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

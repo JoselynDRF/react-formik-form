@@ -5,8 +5,9 @@ import {
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
 import { CheckboxWithLabel, RadioGroup, TextField } from 'formik-material-ui';
+import * as Yup from 'yup';
 
-export default () => (
+const ContactDetailsForm = () => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
@@ -56,3 +57,21 @@ export default () => (
     </Grid>
   </Grid>
 );
+
+ContactDetailsForm.title = 'Contact Details';
+
+ContactDetailsForm.initialValues = {
+  phoneNumber: '',
+  email: '',
+  arrivingType: 'standard',
+  allowNewsletter: false,
+};
+
+ContactDetailsForm.validationSchema = Yup.object({
+  phoneNumber: Yup.string().required('required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('required'),
+});
+
+export default ContactDetailsForm;

@@ -3,8 +3,9 @@ import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
 import { CheckboxWithLabel, Select, TextField } from 'formik-material-ui';
+import * as Yup from 'yup';
 
-export default () => (
+const DeliveryAddressForm = () => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
@@ -114,3 +115,28 @@ export default () => (
     </Grid>
   </Grid>
 );
+
+DeliveryAddressForm.title = 'Delivery Address';
+
+DeliveryAddressForm.initialValues = {
+  firstName: '',
+  lastName: '',
+  address: '',
+  additionalInfo: '',
+  country: '',
+  city: '',
+  state: '',
+  postalCode: '',
+  saveAddress: false,
+};
+
+DeliveryAddressForm.validationSchema = Yup.object({
+  firstName: Yup.string().required('required'),
+  lastName: Yup.string().required('required'),
+  address: Yup.string().required('required'),
+  country: Yup.string().required('required'),
+  city: Yup.string().required('required'),
+  postalCode: Yup.string().required('required'),
+});
+
+export default DeliveryAddressForm;

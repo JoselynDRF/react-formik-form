@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { Divider } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const products = [
   { name: 'Product 1', desc: 'Product 1 description', price: '$10.00' },
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+const OrderSummary = () => {
   const classes = useStyles();
 
   return (
@@ -80,3 +80,7 @@ export default () => {
     </>
   );
 };
+
+OrderSummary.title = 'Order Summary';
+
+export default OrderSummary;
