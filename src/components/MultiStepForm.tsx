@@ -4,7 +4,9 @@ import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
-import { Form, Formik, FormikProps } from 'formik';
+import {
+  Form, Formik, FormikProps, FormikValues,
+} from 'formik';
 import ContactDetailsForm from './ContactDetailsForm';
 import DeliveryAddressForm from './DeliveryAddressForm';
 import OrderSummary from './OrderSummary';
@@ -54,7 +56,9 @@ export default (): JSX.Element => {
     setShowSuccess(true);
   };
 
-  const handleSubmit = async (values) => (isLastStep() ? submitForm(values) : handleNext());
+  const handleSubmit = async (values) => (isLastStep()
+    ? submitForm(values)
+    : handleNext());
 
   return (
     <Formik
@@ -62,7 +66,7 @@ export default (): JSX.Element => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ values }: FormikProps<any>) => (
+      {({ values }: FormikProps<FormikValues>) => (
         <>
           {showSuccess && <SuccessDialog values={values} />}
 

@@ -5,8 +5,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { FormikValues } from 'formik';
 
-export default ({ values }: any) : JSX.Element => {
+export default ({ values }: FormikValues) : JSX.Element => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {

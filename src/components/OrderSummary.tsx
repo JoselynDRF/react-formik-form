@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { FormikValues } from 'formik';
 import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +48,7 @@ const getPaymentsData = ({ cardHolder, cardNumber, expiryDate }) => [
   { name: 'Expiry date', detail: expiryDate },
 ];
 
-const OrderSummary = ({ values }: any): JSX.Element => {
+const OrderSummary = ({ values }: FormikValues): JSX.Element => {
   const classes = useStyles();
 
   return (
