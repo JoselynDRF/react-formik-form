@@ -5,7 +5,7 @@ import { Field } from 'formik';
 import { CheckboxWithLabel, Select, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 
-const DeliveryAddressForm = () => (
+const DeliveryAddressForm = (): JSX.Element => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field

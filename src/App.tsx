@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default () => {
+export default (): JSX.Element => {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>

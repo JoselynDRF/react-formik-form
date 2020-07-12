@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import ContactDetailsForm from './ContactDetailsForm';
 import DeliveryAddressForm from './DeliveryAddressForm';
 import OrderSummary from './OrderSummary';
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default (): JSX.Element => {
   const classes = useStyles();
   const steps = [DeliveryAddressForm, ContactDetailsForm, PaymentDetailsForm, OrderSummary];
   const [activeStep, setActiveStep] = useState(0);
@@ -62,7 +62,7 @@ export default () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ values }) => (
+      {({ values }: FormikProps<any>) => (
         <>
           {showSuccess && <SuccessDialog values={values} />}
 

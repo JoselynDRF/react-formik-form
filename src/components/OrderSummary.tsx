@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { Fragment } from 'react';
 import { Divider } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -47,7 +47,7 @@ const getPaymentsData = ({ cardHolder, cardNumber, expiryDate }) => [
   { name: 'Expiry date', detail: expiryDate },
 ];
 
-const OrderSummary = ({ values }) => {
+const OrderSummary = ({ values }: any): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -104,5 +104,7 @@ const OrderSummary = ({ values }) => {
 };
 
 OrderSummary.title = 'Order Summary';
+OrderSummary.initialValues = {};
+OrderSummary.validationSchema = Yup.object({});
 
 export default OrderSummary;

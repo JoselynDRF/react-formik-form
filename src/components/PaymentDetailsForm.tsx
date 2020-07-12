@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 
-const PaymentDetailsForm = () => (
+const PaymentDetailsForm = (): JSX.Element => (
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Field
