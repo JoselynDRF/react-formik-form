@@ -50,13 +50,13 @@ export default (): JSX.Element => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const submitForm = async (values) => {
+  const submitForm = async (values: FormikValues) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(values);
+    console.log(values); // eslint-disable-line
     setShowSuccess(true);
   };
 
-  const handleSubmit = async (values) => (isLastStep()
+  const handleSubmit = async (values: FormikValues) => (isLastStep()
     ? submitForm(values)
     : handleNext());
 
